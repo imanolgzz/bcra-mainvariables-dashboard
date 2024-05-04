@@ -1,0 +1,31 @@
+.navbarButton{
+  width: 11rem;
+  height: 2.3rem;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 0.5px;
+  border-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbarButton:hover{
+  background-color: var(--secondary-color)
+}
+
+.iconContainer{
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textContainer{
+  width: 80%;
+  height: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
