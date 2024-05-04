@@ -53,6 +53,7 @@ body{
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    min-height: 700px;
   }
 }
 
@@ -62,17 +63,32 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   position: relative;
+  overflow-y: scroll;
 }
 
 h1{
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   font-weight: 700;
+  padding: 1rem;
 }
 
 h2{
   font-size: 1.8rem;
   font-weight: 700;
   line-height: 2.1rem;
+}
+
+h3{
+  font-size: 2.1rem;
+  font-weight: 600;
+  line-height: 1.8rem;
+  padding: 0.5rem
+}
+
+h4{
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.5rem;
 }
