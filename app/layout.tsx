@@ -21,7 +21,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={outfit.className}>
         <Navbar/>
-        {children}
+        <div className = "pageContainer">
+          {children}
+        </div>
       </body>
     </html>
   );
