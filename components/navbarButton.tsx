@@ -5,11 +5,12 @@ interface NavbarButtonProps {
   text: string;
   href: string;
   icon?: React.ReactNode;
+  onClick?: () => void;
 }
 
-const NavbarButton = ({ text, href, icon }: NavbarButtonProps) => {
+const NavbarButton = ({ text, href, icon, onClick }: NavbarButtonProps) => {
   return (
-    <Link href = {href}>
+    <Link onClick={onClick} href = {href}>
       <div className = {styles.navbarButton}>
         <div className = {styles.iconContainer}>
           {icon ? icon : null}
