@@ -83,7 +83,7 @@ export default function Home() {
             <p>Millones de pesos</p>
           </div>
         </div>
-        <div className={`${styles.baseCard} ${styles.smallCard}`}>
+        <div style={{marginBottom:"1.5rem"}} className={`${styles.baseCard} ${styles.smallCard}`}>
           <h4>Más Información</h4>
           <Link href="https://www.bcra.gob.ar/PublicacionesEstadisticas/Principales_variables.asp" target="_blank">
             <BsInfoCircle style={{margin:"0.2rem"}} size={"3rem"} />
