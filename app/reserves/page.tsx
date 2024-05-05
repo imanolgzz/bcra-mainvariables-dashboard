@@ -1,6 +1,4 @@
 'use client';
-import DatePicker from "antd/es/date-picker"
-import type { DatePickerProps } from 'antd/es/date-picker/index';
 
 import styles from '@/styles/reserves.module.css';
 import dayjs from 'dayjs';
@@ -52,20 +50,6 @@ export default function Reserves(){
   })
 
   const [reservesData, setReservesData] = useState<reservesProps|undefined> (undefined)
-
-  const handleStartDateChange: DatePickerProps['onChange'] = (date, dateString) => {
-    setDates({
-      startDate: dateString.toString(),
-      endDate: dates.endDate
-    })
-  };
-
-  const handleEndDateChange: DatePickerProps['onChange'] = (date, dateString) => {
-    setDates({
-      startDate: dates.startDate,
-      endDate: dateString.toString()
-    })
-  };
 
   const fetchReservesData = async () => {
     if(dates.startDate === '' || dates.endDate === ''){
@@ -124,29 +108,33 @@ export default function Reserves(){
           maxDate={dayjs()}
         />
         */}
-        <div style={{display:"flex", flexWrap:"wrap", justifyContent:"center", alignItems:"center", gap:"0.5rem", padding:"0 0.8rem 0 0.8rem"}}>
-        <DatePicker
-            onChange={handleStartDateChange}
-            size="middle"
-            picker="date"
-            placement="bottomRight"
-            format={dateFormat}
-            placeholder="Fecha de inicio"
-            minDate={dayjs('1996-01-02', dateFormat)}
-            //maxDate={dayjs(dates.endDate,dateFormat)}
-            //maxDate es la fecha fin o la fecha actual, la que sea menor
-            maxDate={dayjs(dates.endDate,dateFormat) < dayjs() ? dayjs(dates.endDate,dateFormat) : dayjs()}
+        <div style={{display:"flex", flexWrap:"nowrap", justifyContent:"center", alignItems:"center", gap:"1rem", padding:"0 0.8rem 0 0.8rem"}}>
+          <input
+            type="date"
+            onChange={(e) => {
+              setDates({
+                ...dates,
+                startDate: e.target.value
+              })
+            }}
+            value={dates.startDate}
+            style={{width:"9rem", height:"2rem", borderRadius:"3px", textAlign:"center", fontFamily:"monospace", paddingRight: "0.5rem", fontSize:"1rem"}}
+            min="1996-01-02"
+            // El valor máximo debe ser la fecha actual o la fecha de fin lo que sea menor
+            max={dates.endDate === '' ? dayjs().format(dateFormat) : dates.endDate}
           />
-          <DatePicker
-            onChange={handleEndDateChange}
-            size="middle"
-            picker="date"
-            placement="bottomLeft"
-            format={dateFormat}
-            placeholder="Fecha de fin"
-            //minDate={dayjs(dates.startDate,dateFormat)}
-            minDate={dayjs(dates.startDate,dateFormat) > dayjs('1996-01-02', dateFormat) ? dayjs(dates.startDate,dateFormat) : dayjs('1996-01-02', dateFormat)}
-            maxDate={dayjs()}
+          <input
+            type="date"
+            onChange={(e) => {
+              setDates({
+                ...dates,
+                endDate: e.target.value
+              })
+            }}
+            value={dates.endDate}
+            style={{width:"9rem", height:"2rem", borderRadius:"3px", textAlign:"center", fontFamily:"monospace", paddingRight: "0.5rem", fontSize:"1rem"}}
+            min = {dates.startDate === '' ? "1996-01-02" : dates.startDate}
+            max={dayjs().format(dateFormat)}
           />
         </div>
         
