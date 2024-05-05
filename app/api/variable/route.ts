@@ -17,7 +17,11 @@ export async function POST(req: Request) {
 
   data.results.forEach((element: { fecha: string; valor: string; }) => {
     dates.push(element.fecha);
-    values.push(parseFloat(element.valor.replace('.', '')));
+    console.log("string: ", element.valor);
+    let aux = element.valor.replace('.', '');
+    values.push(parseFloat(aux.replace(',', '.')));
+    // print the last value
+    console.log("last value: ", values[values.length - 1]);
   });
 
   // Si está vacío, devolver un error

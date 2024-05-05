@@ -55,7 +55,7 @@ export default function Reserves(){
     if(dates.startDate === '' || dates.endDate === ''){
       return
     }
-    
+        
     setIsFetchingData(true)
     const response = await fetch('/api/variable', {
       method: 'POST',

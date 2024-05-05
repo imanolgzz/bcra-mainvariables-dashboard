@@ -39,9 +39,6 @@ export async function POST(req: Request) {
     });
   });
 
-  console.log("Dates: ", dates);
-  console.log("Values: ", values);
-
   let finalDates: string[] = [];
   let finalValues: number[][] = [];
 

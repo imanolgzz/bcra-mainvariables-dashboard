@@ -53,15 +53,17 @@ export default function Reserves(){
     endDate: ''
   })
 
-  const [retailExchangeRateData, setRetailExchangeRateData] = useState<queryProps|undefined> (undefined)
-  const [wholesaleExchangeRateData, setWholesaleExchangeRateData] = useState<queryProps|undefined> (undefined)
   const [combinedExchangeRateData, setCombinedExchangeRateData] = useState<combinedQueryProps|undefined> (undefined)
+  let retailExchangeRateData: queryProps|undefined = undefined;
+  let wholesaleExchangeRateData: queryProps|undefined = undefined;
 
   const fetchCombinedExchangeRateData = async () => {
     if(retailExchangeRateData === undefined || wholesaleExchangeRateData === undefined){
       setIsFetchingData(false);
-      setMensaje("Problema al combinar datos");
-      return
+      setMensaje("Error al mostrar las gráficas");
+      console.log(retailExchangeRateData)
+      console.log(wholesaleExchangeRateData)
+      return;
     }
     setIsFetchingData(true);
     let body = [
@@ -86,6 +88,7 @@ export default function Reserves(){
     const data = await response.json()
 
     if(response.status === 200){
+      console.log("console 6")
       setCombinedExchangeRateData(data);
       setIsFetchingData(false);
     } else {
@@ -99,6 +102,7 @@ export default function Reserves(){
     if(dates.startDate === '' || dates.endDate === ''){
       return
     }
+    console.log("started fetching data")
     setIsFetchingData(true)
     const response = await fetch('/api/variable', {
       method: 'POST',
@@ -110,11 +114,10 @@ export default function Reserves(){
         startDate: dates.startDate,
         endDate: dates.endDate
       }),
-    })
-    const data = await response.json()
-    if(response.status === 200){
-      setRetailExchangeRateData(data);
-      const response2 = await fetch('/api/variable', {
+    }).then(response => response.json()).then(data => {
+      console.log("Data from retail exchange rate received ", data);
+      retailExchangeRateData = data;
+      const response2 = fetch('/api/variable', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -124,24 +127,21 @@ export default function Reserves(){
           startDate: dates.startDate,
           endDate: dates.endDate
         }),
-      })
-      const data2 = await response2.json()
-      if(response2.status === 200){
-        setWholesaleExchangeRateData(data2);
-        await fetchCombinedExchangeRateData();
-      } else {
-        setMensaje(data2.error);
-        setWholesaleExchangeRateData(undefined);
+      }).then(response => response.json()).then(data => {
+        console.log("Data from wholesale exchange rate received ", data);
+        wholesaleExchangeRateData = data;
+        fetchCombinedExchangeRateData();
+      }).catch(error => {
+        console.error('Error:', error);
         setIsFetchingData(false);
-      }
-    } else {
-      setMensaje(data.error);
-      setRetailExchangeRateData(undefined);
+        setMensaje("Error al obtener los datos");
+      });
+
+  }).catch(error => {
+      console.error('Error:', error);
       setIsFetchingData(false);
-      return;
-    }
-
-
+      setMensaje("Error al obtener los datos");
+  })
   }
 
   const options = {
@@ -168,7 +168,7 @@ export default function Reserves(){
               console.log(dates.startDate);
             }}
             value={dates.startDate}
-            min="1996-01-02"
+            min="2010-06-01"
             max={dates.endDate === '' ? dayjs().format(dateFormat) : dates.endDate}
           />
           <InputCalendar
@@ -180,7 +180,7 @@ export default function Reserves(){
               console.log(dates.endDate);
             }}
             value={dates.endDate}
-            min = {dates.startDate === '' ? "1996-01-02" : dates.startDate}
+            min = {dates.startDate === '' ? "2010-06-01" : dates.startDate}
             max={dayjs().format(dateFormat)}
           />
         </div>
@@ -189,7 +189,7 @@ export default function Reserves(){
         Buscar
       </div>
       {isFetchingData && <p>Cargando...</p>}
-      {(((retailExchangeRateData === undefined) || (wholesaleExchangeRateData === undefined)) && !isFetchingData) && <p>{mensaje}</p>}
+      {((combinedExchangeRateData === undefined) && !isFetchingData) && <p>{mensaje}</p>}
       {(!isFetchingData && (combinedExchangeRateData)) && (
         <div style={{width: "90%", height: "62%"}}>
           <Line 
