@@ -21,7 +21,7 @@ interface generalProps {
 
 export default function Home() {
 
-  const [isFetchingData, setIsFetchingData] = useState(false)
+  const [isFetchingData, setIsFetchingData] = useState(true)
   const [generalData, setGeneralData] = useState<generalProps | undefined>(undefined);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export default function Home() {
       {isFetchingData && <p>Cargando...</p>}
       {!isFetchingData && (
         <div className={styles.cardsContainer}>
-          <div onClick={() => {fetchGeneralData()}} className={`${styles.baseCard} ${styles.smallCard}`}>
+          <div className={`${styles.baseCard} ${styles.smallCard}`}>
             <h4>Reservas Internacionales</h4>
             <div>
               <h3>${generalData?.internationalReserves.value}</h3>
@@ -113,15 +113,15 @@ export default function Home() {
           <div className={`${styles.baseCard} ${styles.smallCard}`}>
             <h4>Depósitos en Efectivo en las Entidades Financieras</h4>
             <div>
-              <h3>{generalData?.depositsInFinancialEntities.value}</h3>
+              <h3>${generalData?.depositsInFinancialEntities.value}</h3>
               <p>Millones de pesos</p>
             </div>
           </div>
           
           <div className={`${styles.baseCard} ${styles.smallCard}`}>
-            <h4>Préstamos al sector privado de las Entidades Financieras</h4>
+            <h4>Préstamos al Sector Privado de las Entidades Financieras</h4>
             <div>
-              <h3>{generalData?.loansToPrivateSector.value}</h3>
+              <h3>${generalData?.loansToPrivateSector.value}</h3>
               <p>Millones de pesos</p>
             </div>
           </div>
