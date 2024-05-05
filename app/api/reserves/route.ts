@@ -14,13 +14,21 @@ export async function POST(req: Request) {
 
   let dates: string[] = [];
   let values: number[] = [];
+
   data.results.forEach((element: { fecha: string; valor: string; }) => {
     dates.push(element.fecha);
     values.push(parseFloat(element.valor.replace('.', '')));
   });
 
-  // Convert to JSON with dates : string[] and values: number[]
+  // Si está vacío, devolver un error
+  if (dates.length === 0 || values.length === 0) {
+    return new Response(JSON.stringify({error: "No se encontraron datos en el rango de fechas proporcionado"}), {status: 404});
+  }
 
+  // Ir ordenando los datos por fecha
+  data.results.sort((a: { fecha: string; }, b: { fecha: string; }) => {
+    return new Date(a.fecha).getTime() - new Date(b.fecha).getTime();
+  });
 
   return new Response(JSON.stringify({dates, values}), {status: 200});
 }
