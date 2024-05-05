@@ -1,5 +1,5 @@
 export async function POST(req: Request) {
-  //process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'; // Desactiva la verificación del certificado SSL
+  process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'; // Desactiva la verificación del certificado SSL
   const dataEndpoint = "https://api.bcra.gob.ar/estadisticas/v1/PrincipalesVariables";
   const response = await fetch(dataEndpoint, {
     method: 'GET',
