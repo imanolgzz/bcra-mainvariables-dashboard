@@ -1,6 +1,6 @@
 'use client';
-
 import styles from '@/styles/reserves.module.css';
+import InputCalendar from '@/components/inputCalendar';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { useState } from "react";
@@ -43,7 +43,7 @@ ChartJS.register(
 
 export default function Reserves(){
   const [isFetchingData, setIsFetchingData] = useState(false)
-  const [mensaje, setMensaje] = useState<string>("Ingrese valores para visualizar la gráfica")
+  const [mensaje, setMensaje] = useState<string>("")
   const [dates,setDates] = useState<datesProps> ({
     startDate: '',
     endDate: ''
@@ -57,12 +57,13 @@ export default function Reserves(){
     }
     
     setIsFetchingData(true)
-    const response = await fetch('/api/reserves', {
+    const response = await fetch('/api/variable', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        idVariable: 1,
         startDate: dates.startDate,
         endDate: dates.endDate
       }),
@@ -93,53 +94,32 @@ export default function Reserves(){
       <h1>Reservas Internacionales</h1>
       <div className = {styles.generalContainer}>
         <p style={{textAlign:"center", paddingRight: "1rem", paddingLeft:"1rem"}}>Seleccione un rango de fechas para ver la evolución de las reservas internacionales (en millones de dólares).</p>
-        {/* 
-        <RangePicker
-          onChange={(dates, dateStrings) => {
-            setDates({
-              startDate: dateStrings[0],
-              endDate: dateStrings[1]
-            })
-          }}
-          size="large"
-          picker="date"
-          placement="bottomRight"
-          minDate={dayjs('1996-01-02', dateFormat)}
-          maxDate={dayjs()}
-        />
-        */}
         <div style={{display:"flex", flexWrap:"nowrap", justifyContent:"center", alignItems:"center", gap:"1rem", padding:"0 0.8rem 0 0.8rem"}}>
-          <input
-            type="date"
+          <InputCalendar
             onChange={(e) => {
               setDates({
                 ...dates,
                 startDate: e.target.value
-              })
+              });
+              console.log(dates.startDate);
             }}
             value={dates.startDate}
-            style={{width:"9rem", height:"2rem", borderRadius:"3px", textAlign:"center", fontFamily:"monospace", paddingRight: "0.5rem", fontSize:"1rem"}}
             min="1996-01-02"
-            // El valor máximo debe ser la fecha actual o la fecha de fin lo que sea menor
             max={dates.endDate === '' ? dayjs().format(dateFormat) : dates.endDate}
           />
-          <input
-            type="date"
+          <InputCalendar
             onChange={(e) => {
               setDates({
                 ...dates,
                 endDate: e.target.value
-              })
+              });
+              console.log(dates.endDate);
             }}
             value={dates.endDate}
-            style={{width:"9rem", height:"2rem", borderRadius:"3px", textAlign:"center", fontFamily:"monospace", paddingRight: "0.5rem", fontSize:"1rem"}}
             min = {dates.startDate === '' ? "1996-01-02" : dates.startDate}
             max={dayjs().format(dateFormat)}
           />
         </div>
-        
-        
-        
       </div>
       <div onClick={() => {fetchReservesData()}} className = {styles.searchButton}>
         Buscar
@@ -154,7 +134,7 @@ export default function Reserves(){
               labels: reservesData?.dates,
               datasets: [
                 {
-                  label: 'Reservas Internacionales BCRA',
+                  label: 'Reservas Internacionales del BCRA (en millones de dólares)',
                   data: reservesData?.values,
                   fill: false,
                   borderColor: 'rgb(0,0,0)',
