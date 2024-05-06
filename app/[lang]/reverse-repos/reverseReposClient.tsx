@@ -41,7 +41,7 @@ ChartJS.register(
   Legend
 );
 
-export default function Reserves(){
+export default function ReverseReposClient({t}: any){
   const [isFetchingData, setIsFetchingData] = useState(false)
   const [mensaje, setMensaje] = useState<string>("")
   const [dates,setDates] = useState<datesProps> ({
@@ -74,7 +74,7 @@ export default function Reserves(){
       console.log(reverseReposData);
       setIsFetchingData(false);
     } else {
-      setMensaje(data.error);
+      setMensaje(t.notFound);
       setreverseReposData(undefined);
       setIsFetchingData(false);
     }
@@ -91,9 +91,9 @@ export default function Reserves(){
 
   return(
     <>
-      <h1>Pases Pasivos del BCRA</h1>
+      <h1>{t.title}</h1>
       <div className = {styles.generalContainer}>
-        <p style={{textAlign:"center", paddingRight: "1rem", paddingLeft:"1rem"}}>Seleccione un rango de fechas para ver la evolución de los pases pasivos del BCRA (en millones de pesos).</p>
+        <p style={{textAlign:"center", paddingRight: "1rem", paddingLeft:"1rem"}}>{t.description}</p>
         <div style={{display:"flex", flexWrap:"nowrap", justifyContent:"center", alignItems:"center", gap:"1rem", padding:"0 0.8rem 0 0.8rem"}}>
           <InputCalendar
             onChange={(e) => {
@@ -122,9 +122,9 @@ export default function Reserves(){
         </div>
       </div>
       <div onClick={() => {fetchreverseReposData()}} className = {styles.searchButton}>
-        Buscar
+        {t.search}
       </div>
-      {isFetchingData && <p>Cargando...</p>}
+      {isFetchingData && <p>{t.loading}</p>}
       {((reverseReposData === undefined) && !isFetchingData) && <p>{mensaje}</p>}
       {(!isFetchingData && reverseReposData) && (
         <div style={{width: "90%", height: "62%"}}>
@@ -134,7 +134,7 @@ export default function Reserves(){
               labels: reverseReposData?.dates,
               datasets: [
                 {
-                  label: 'Pases Pasivos del BCRA (en millones de pesos)',
+                  label: t.graphLegends[0],
                   data: reverseReposData?.values,
                   fill: false,
                   borderColor: 'rgb(0,0,0)',

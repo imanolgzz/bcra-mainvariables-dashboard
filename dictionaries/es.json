@@ -1,0 +1,118 @@
+{
+  "home":{
+    "loading":"Cargando...",
+    "title":"Estadísticas generales",
+    "internationalReserves":"Reservas Internacionales",
+    "millionsOfDollars":"Millones de dólares",
+    "millionsOfPesos":"Millones de pesos",
+    "exchangeRate":"Tipo de Cambio",
+    "monetaryBase":"Base Monetaria",
+    "reverseRepos":"Pases Pasivos para el BCRA",
+    "monetaryPolicyRate":"Tasa de Política Monetaria",
+    "inflationRate":"Tasa de Inflación",
+    "cashDeposits":"Depósitos en Efectivo en las Entidades Financieras",
+    "privateDebts":"Préstamos al Sector Privado de las Entidades Financieras",
+    "moreInformation":"Más información",
+    "about":"Visita la página oficial del BCRA",
+    "retail": "Minorista",
+    "wholesale": "Mayorista",
+    "TEA": "TEA",
+    "TNA": "TNA",
+    "Monthly": "Mensual",
+    "YearOnYear": "Interanual",
+    "BCRALink": "https://www.bcra.gob.ar/PublicacionesEstadisticas/Principales_variables.asp"
+  },
+  "navbar":{
+    "home": "General",
+    "reserves": "Reservas BCRA",
+    "exchangeRate": "Tipo de Cambio",
+    "interestRates": "Tasas de Interés",
+    "monetaryBase": "Base Monetaria",
+    "reverseRepos": "Pases Pasivos",
+    "inflation": "Inflación",
+    "about": "Acerca de",
+    "mainVariables": "Principales Variables"
+  },
+  "reserves":{
+    "title":"Reservas Internacionales",
+    "description": "Seleccione un rango de fechas para ver la evolución de las reservas internacionales (en millones de dólares).",
+    "search": "Buscar",
+    "graphLegends":[
+      "Reservas Internacionales del BCRA (en millones de dólares)"
+    ],
+    "loading": "Cargando...",
+    "error": "Error al cargar los datos",
+    "notFound": "No se encontraron datos en el rango de fechas proporcionado"
+  },
+  "exchangeRate":{
+    "title":"Tipo de Cambio",
+    "description": "Seleccione un rango de fechas para ver la evolución del tipo de cambio oficial (en pesos por dólar).",
+    "search": "Buscar",
+    "graphLegends": [
+      "Tipo de cambio minorista",
+      "Tipo de cambio mayorista"
+    ],
+    "loading": "Cargando...",
+    "error": "Error al cargar los datos",
+    "notFound": "No se encontraron datos en el rango de fechas proporcionado"
+  },
+  "interestRates":{
+    "title":"Tasas de Interés",
+    "description": "Seleccione un rango de fechas para ver la evolución de la tasa de política monetaria.",
+    "search": "Buscar",
+    "graphLegends": [
+      "Tasa Nominal Anual (TNA)",
+      "Tasa Efectiva Anual (TEA)"
+    ],
+    "loading": "Cargando...",
+    "error": "Error al cargar los datos",
+    "notFound": "No se encontraron datos en el rango de fechas proporcionado"
+  },
+  "monetaryBase":{
+    "title":"Base Monetaria",
+    "description": "Seleccione un rango de fechas para ver la evolución de la base monetaria nominal (en millones de pesos).",
+    "search": "Buscar",
+    "graphLegends": [
+      "Base Monetaria Nominal (en millones de pesos)"
+    ],
+    "loading": "Cargando...",
+    "error": "Error al cargar los datos",
+    "notFound": "No se encontraron datos en el rango de fechas proporcionado"
+  },
+  "reverseRepos":{
+    "title":"Pases Pasivos",
+    "description": "Seleccione un rango de fechas para ver la evolución de los pases pasivos para el BCRA (en millones de pesos).",
+    "search": "Buscar",
+    "graphLegends": [
+      "Pases Pasivos para el BCRA (en millones de pesos)"
+    ],
+    "loading": "Cargando...",
+    "error": "Error al cargar los datos",
+    "notFound": "No se encontraron datos en el rango de fechas proporcionado"
+  },
+  "inflation":{
+    "title":"Inflación",
+    "description": "Seleccione un rango de fechas para ver la evolución de la inflación mensual e interanual.",
+    "search": "Buscar",
+    "graphLegends": [
+      "Inflación Mensual",
+      "Inflación Interanual"
+    ],
+    "loading": "Cargando...",
+    "error": "Error al cargar los datos",
+    "notFound": "No se encontraron datos en el rango de fechas proporcionado"
+  },
+  "about":{
+    "title":"Acerca de",
+    "description": "Aplicación Web desarrollada por Imanol González utilizando la API de principales variables del Banco Central de la República Argentina (BCRA). Si tienes alguna sugerencia o quieres colaborar en el proyecto contáctame en alguna de mis redes o por medio de mi página web.",
+    "apiText": "API de principales variables del BCRA",
+    "bcraPage": "Página oficial del BCRA",
+    "repoText": "Repositorio de la aplicación en GitHub",
+    "contactText": "Contacto del desarrollador",
+    "webPage": "Página web",
+    "X": "X",
+    "LinkedIn": "LinkedIn",
+    "Version": "Versión",
+    "LastUpdate": "Última actualización"
+  }
+}

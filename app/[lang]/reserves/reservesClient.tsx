@@ -41,7 +41,7 @@ ChartJS.register(
   Legend
 );
 
-export default function Reserves(){
+export default function ReservesClient({t}: any){
   const [isFetchingData, setIsFetchingData] = useState(false)
   const [mensaje, setMensaje] = useState<string>("")
   const [dates,setDates] = useState<datesProps> ({
@@ -49,9 +49,9 @@ export default function Reserves(){
     endDate: ''
   })
 
-  const [monetaryBaseData, setmonetaryBaseData] = useState<queryProps|undefined> (undefined)
+  const [reservesData, setReservesData] = useState<queryProps|undefined> (undefined)
 
-  const fetchmonetaryBaseData = async () => {
+  const fetchReservesData = async () => {
     if(dates.startDate === '' || dates.endDate === ''){
       return
     }
@@ -63,19 +63,19 @@ export default function Reserves(){
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        idVariable: 15,
+        idVariable: 1,
         startDate: dates.startDate,
         endDate: dates.endDate
       }),
     })
     const data = await response.json()
     if(response.status === 200){
-      setmonetaryBaseData(data);
-      console.log(monetaryBaseData);
+      setReservesData(data);
+      console.log(reservesData);
       setIsFetchingData(false);
     } else {
-      setMensaje(data.error);
-      setmonetaryBaseData(undefined);
+      setMensaje(t.notFound);
+      setReservesData(undefined);
       setIsFetchingData(false);
     }
   }
@@ -91,9 +91,9 @@ export default function Reserves(){
 
   return(
     <>
-      <h1>Base Monetaria</h1>
+      <h1>{t.title}</h1>
       <div className = {styles.generalContainer}>
-        <p style={{textAlign:"center", paddingRight: "1rem", paddingLeft:"1rem"}}>Seleccione un rango de fechas para ver la evolución de la base monetaria nominal (en millones de pesos).</p>
+        <p style={{textAlign:"center", paddingRight: "1rem", paddingLeft:"1rem"}}>{t.description}</p>
         <div style={{display:"flex", flexWrap:"nowrap", justifyContent:"center", alignItems:"center", gap:"1rem", padding:"0 0.8rem 0 0.8rem"}}>
           <InputCalendar
             onChange={(e) => {
@@ -121,21 +121,21 @@ export default function Reserves(){
           />
         </div>
       </div>
-      <div onClick={() => {fetchmonetaryBaseData()}} className = {styles.searchButton}>
-        Buscar
+      <div onClick={() => {fetchReservesData()}} className = {styles.searchButton}>
+        {t.search}
       </div>
-      {isFetchingData && <p>Cargando...</p>}
-      {((monetaryBaseData === undefined) && !isFetchingData) && <p>{mensaje}</p>}
-      {(!isFetchingData && monetaryBaseData) && (
+      {isFetchingData && <p>{t.loading}</p>}
+      {((reservesData === undefined) && !isFetchingData) && <p>{mensaje}</p>}
+      {(!isFetchingData && reservesData) && (
         <div style={{width: "90%", height: "62%"}}>
           <Line 
             options={options}
             data={{
-              labels: monetaryBaseData?.dates,
+              labels: reservesData?.dates,
               datasets: [
                 {
-                  label: 'Base Monetaria Nominal (en millones de pesos)',
-                  data: monetaryBaseData?.values,
+                  label: t.graphLegends[0],
+                  data: reservesData?.values,
                   fill: false,
                   borderColor: 'rgb(0,0,0)',
                   borderWidth: 2,

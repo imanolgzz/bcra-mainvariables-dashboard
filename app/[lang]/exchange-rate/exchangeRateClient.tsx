@@ -45,7 +45,7 @@ ChartJS.register(
   Legend
 );
 
-export default function Reserves(){
+export default function ExchangeRateClient({t}: any){
   const [isFetchingData, setIsFetchingData] = useState(false)
   const [mensaje, setMensaje] = useState<string>("")
   const [dates,setDates] = useState<datesProps> ({
@@ -60,7 +60,7 @@ export default function Reserves(){
   const fetchcombinedInterestRateData = async () => {
     if(tnaData === undefined || teaData === undefined){
       setIsFetchingData(false);
-      setMensaje("Error al mostrar las gráficas");
+      setMensaje(t.error);
       console.log(tnaData)
       console.log(teaData)
       return;
@@ -91,7 +91,7 @@ export default function Reserves(){
       setcombinedInterestRateData(data);
       setIsFetchingData(false);
     } else {
-      setMensaje(data.error);
+      setMensaje(t.notFound);
       setcombinedInterestRateData(undefined);
       setIsFetchingData(false);
     }
@@ -114,6 +114,11 @@ export default function Reserves(){
         endDate: dates.endDate
       }),
     }).then(response => response.json()).then(data => {
+      if(data.error){
+        setIsFetchingData(false);
+        setMensaje(t.notFound);
+        return;
+      }
       console.log("Data from retail exchange rate received ", data);
       tnaData = data;
       const response2 = fetch('/api/variable', {
@@ -127,19 +132,24 @@ export default function Reserves(){
           endDate: dates.endDate
         }),
       }).then(response => response.json()).then(data => {
+        if(data.error){
+          setIsFetchingData(false);
+          setMensaje(t.notFound);
+          return;
+        }
         console.log("Data from wholesale exchange rate received ", data);
         teaData = data;
         fetchcombinedInterestRateData();
       }).catch(error => {
         console.error('Error:', error);
         setIsFetchingData(false);
-        setMensaje("Error al obtener los datos");
+        setMensaje(t.error);
       });
 
   }).catch(error => {
       console.error('Error:', error);
       setIsFetchingData(false);
-      setMensaje("Error al obtener los datos");
+      setMensaje(t.error);
   })
   }
 
@@ -154,9 +164,9 @@ export default function Reserves(){
 
   return(
     <>
-      <h1>Tipo de cambio</h1>
+      <h1>{t.title}</h1>
       <div className = {styles.generalContainer}>
-        <p style={{textAlign:"center", paddingRight: "1rem", paddingLeft:"1rem"}}>Seleccione un rango de fechas para ver la evolución del tipo de cambio oficial</p>
+        <p style={{textAlign:"center", paddingRight: "1rem", paddingLeft:"1rem"}}>{t.description}</p>
         <div style={{display:"flex", flexWrap:"nowrap", justifyContent:"center", alignItems:"center", gap:"1rem", padding:"0 0.8rem 0 0.8rem"}}>
           <InputCalendar
             onChange={(e) => {
@@ -185,9 +195,9 @@ export default function Reserves(){
         </div>
       </div>
       <div onClick={() => {fetchExchangeRateData()}} className = {styles.searchButton}>
-        Buscar
+        {t.search}
       </div>
-      {isFetchingData && <p>Cargando...</p>}
+      {isFetchingData && <p>{t.loading}</p>}
       {((combinedInterestRateData === undefined) && !isFetchingData) && <p>{mensaje}</p>}
       {(!isFetchingData && (combinedInterestRateData)) && (
         <div style={{width: "90%", height: "62%"}}>
@@ -197,7 +207,7 @@ export default function Reserves(){
               labels: combinedInterestRateData?.dates,
               datasets: [
                 {
-                  label: 'Tipo de cambio Minorista',
+                  label: t.graphLegends[0],
                   data: combinedInterestRateData?.values[0],
                   fill: false,
                   borderColor: 'rgb(0,0,0)',
@@ -205,7 +215,7 @@ export default function Reserves(){
                   pointRadius: 0
                 },
                 {
-                  label: 'Tipo de cambio Mayorista',
+                  label: t.graphLegends[1],
                   data: combinedInterestRateData?.values[1],
                   fill: false,
                   borderColor: 'rgb(255,0,0)',

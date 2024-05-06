@@ -1,0 +1,118 @@
+{
+  "home":{
+    "loading":"Loading...",
+    "title":"General Statistics",
+    "internationalReserves":"International Reserves",
+    "millionsOfDollars":"Million dollars",
+    "millionsOfPesos":"Million pesos",
+    "exchangeRate":"Exchange Rate",
+    "monetaryBase":"Monetary Base",
+    "reverseRepos":"Reverse Repos for the BCRA",
+    "monetaryPolicyRate":"Monetary Policy Rate",
+    "inflationRate":"Inflation Rate",
+    "cashDeposits":"Cash Deposits with Financial Institutions",
+    "privateDebts":"Financial Institutions Loans to the Private Sector",
+    "moreInformation":"More Information",
+    "about":"Visit the official website of the Central Bank of Argentina (BCRA) for more information",
+    "retail": "Retail",
+    "wholesale": "Wholesale",
+    "TEA": "EAR",
+    "TNA": "APR",
+    "Monthly": "Monthly",
+    "YearOnYear": "Year-on-Year",
+    "BCRALink": "https://www.bcra.gob.ar/PublicacionesEstadisticas/Principales_variables_i.asp"
+  },
+  "navbar":{
+    "home": "General",
+    "reserves": "Reserves BCRA",
+    "exchangeRate": "Exchange Rate",
+    "interestRates": "Interest Rates",
+    "monetaryBase": "Monetary Base",
+    "reverseRepos": "Reverse Repos",
+    "inflation": "Inflation",
+    "about": "About",
+    "mainVariables": "Main Variables"
+  },
+  "reserves": {
+    "title": "International Reserves",
+    "description": "Select a date range to see the evolution of international reserves (in million dollars).",
+    "search": "Search",
+    "graphLegends": [
+      "BCRA International Reserves (in millions dollars)"
+    ],
+    "loading": "Loading...",
+    "error": "Error loading data",
+    "notFound": "No data found for the provided date range"
+  },
+  "exchangeRate": {
+    "title": "Exchange Rate",
+    "description": "Select a date range to see the evolution of the official exchange rate (in pesos per dollar).",
+    "search": "Search",
+    "graphLegends": [
+      "Retail Exchange Rate",
+      "Wholesale Exchange Rate"
+    ],
+    "loading": "Loading...",
+    "error": "Error loading data",
+    "notFound": "No data found for the provided date range"
+  },
+  "interestRates": {
+    "title": "Interest Rates",
+    "description": "Select a date range to see the evolution of the monetary policy rate.",
+    "search": "Search",
+    "graphLegends": [
+      "Annual Percentage Rate (APR)",
+      "Effective Annual Rate (EAR)"
+    ],
+    "loading": "Loading...",
+    "error": "Error loading data",
+    "notFound": "No data found for the provided date range"
+  },
+  "monetaryBase": {
+    "title": "Monetary Base",
+    "description": "Select a date range to see the evolution of the nominal monetary base (in million pesos).",
+    "search": "Search",
+    "graphLegends": [
+      "Nominal Monetary Base (in million pesos)"
+    ],
+    "loading": "Loading...",
+    "error": "Error loading data",
+    "notFound": "No data found for the provided date range"
+  },
+  "reverseRepos": {
+    "title": "Reverse Repos",
+    "description": "Select a date range to see the evolution of reverse repos for the BCRA (in million pesos).",
+    "search": "Search",
+    "graphLegends": [
+      "Reverse Repos for the BCRA (in millions of pesos)"
+    ],
+    "loading": "Loading...",
+    "error": "Error loading data",
+    "notFound": "No data found for the provided date range"
+  },
+  "inflation": {
+    "title": "Inflation",
+    "description": "Select a date range to see the evolution of monthly and year-on-year inflation.",
+    "search": "Search",
+    "graphLegends": [
+      "Monthly Inflation",
+      "Year-on-Year Inflation"
+    ],
+    "loading": "Loading...",
+    "error": "Error loading data",
+    "notFound": "No data found for the provided date range"
+  },
+  "about": {
+    "title": "About",
+    "description": "Web application developed by Imanol González using the API of key variables from the Central Bank of the Argentine Republic (BCRA). If you have any suggestions or want to collaborate on the project, contact me through one of my social media channels or through my website.",
+    "apiText": "API of key variables from the BCRA",
+    "bcraPage": "Official BCRA Page",
+    "repoText": "Application Repository on GitHub",
+    "contactText": "Developer Contact",
+    "webPage": "Website",
+    "X": "X",
+    "LinkedIn": "LinkedIn",
+    "Version": "Version",
+    "LastUpdate": "Last Update"
+  }
+}

@@ -45,7 +45,7 @@ ChartJS.register(
   Legend
 );
 
-export default function Reserves(){
+export default function InterestRateClient({t}: any){
   const [isFetchingData, setIsFetchingData] = useState(false)
   const [mensaje, setMensaje] = useState<string>("")
   const [dates,setDates] = useState<datesProps> ({
@@ -53,27 +53,27 @@ export default function Reserves(){
     endDate: ''
   })
 
-  const [combinedInflationRateData, setcombinedInflationRateData] = useState<combinedQueryProps|undefined> (undefined)
-  let monthlyInflation: queryProps|undefined = undefined;
-  let annualInflation: queryProps|undefined = undefined;
+  const [combinedExchangeRateData, setCombinedExchangeRateData] = useState<combinedQueryProps|undefined> (undefined)
+  let retailExchangeRateData: queryProps|undefined = undefined;
+  let wholesaleExchangeRateData: queryProps|undefined = undefined;
 
-  const fetchcombinedInflationRateData = async () => {
-    if(monthlyInflation === undefined || annualInflation === undefined){
+  const fetchCombinedExchangeRateData = async () => {
+    if(retailExchangeRateData === undefined || wholesaleExchangeRateData === undefined){
       setIsFetchingData(false);
-      setMensaje("Error al mostrar las gráficas");
-      console.log(monthlyInflation)
-      console.log(annualInflation)
+      setMensaje(t.error);
+      console.log(retailExchangeRateData)
+      console.log(wholesaleExchangeRateData)
       return;
     }
     setIsFetchingData(true);
     let body = [
       {
-        dates: monthlyInflation.dates,
-        values: monthlyInflation.values
+        dates: retailExchangeRateData.dates,
+        values: retailExchangeRateData.values
       },
       {
-        dates: annualInflation.dates,
-        values: annualInflation.values
+        dates: wholesaleExchangeRateData.dates,
+        values: wholesaleExchangeRateData.values
       }
     ]
 
@@ -88,16 +88,16 @@ export default function Reserves(){
     const data = await response.json()
 
     if(response.status === 200){
-      setcombinedInflationRateData(data);
+      setCombinedExchangeRateData(data);
       setIsFetchingData(false);
     } else {
-      setMensaje(data.error);
-      setcombinedInflationRateData(undefined);
+      setMensaje(t.notFound);
+      setCombinedExchangeRateData(undefined);
       setIsFetchingData(false);
     }
   }
 
-  const fetchInflationRateData = async () => {
+  const fetchExchangeRateData = async () => {
     if(dates.startDate === '' || dates.endDate === ''){
       return
     }
@@ -109,35 +109,37 @@ export default function Reserves(){
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        idVariable: 27,
+        idVariable: 6,
         startDate: dates.startDate,
-        endDate: dayjs(dates.endDate).endOf('month').format('YYYY-MM-DD')
+        endDate: dates.endDate
       }),
     }).then(response => response.json()).then(data => {
-      monthlyInflation = data;
+      console.log("Data from retail exchange rate received ", data);
+      retailExchangeRateData = data;
       const response2 = fetch('/api/variable', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          idVariable: 28,
+          idVariable: 34,
           startDate: dates.startDate,
-          endDate: dayjs(dates.endDate).endOf('month').format('YYYY-MM-DD')
+          endDate: dates.endDate
         }),
       }).then(response => response.json()).then(data => {
-        annualInflation = data;
-        fetchcombinedInflationRateData();
+        console.log("Data from wholesale exchange rate received ", data);
+        wholesaleExchangeRateData = data;
+        fetchCombinedExchangeRateData();
       }).catch(error => {
         console.error('Error:', error);
         setIsFetchingData(false);
-        setMensaje("Error al obtener los datos");
+        setMensaje(t.error);
       });
 
   }).catch(error => {
       console.error('Error:', error);
       setIsFetchingData(false);
-      setMensaje("Error al obtener los datos");
+      setMensaje(t.error);
   })
   }
 
@@ -148,21 +150,15 @@ export default function Reserves(){
         position: 'top' as const,
       },
     },
-    scales: {
-      y: {
-          beginAtZero: true
-      }
-    }
   };
 
   return(
     <>
-      <h1>Inflación</h1>
+      <h1>{t.title}</h1>
       <div className = {styles.generalContainer}>
-        <p style={{textAlign:"center", paddingRight: "1rem", paddingLeft:"1rem"}}>Seleccione un rango de fechas para ver la inflación mensual e interanual</p>
+        <p style={{textAlign:"center", paddingRight: "1rem", paddingLeft:"1rem"}}>{t.description}</p>
         <div style={{display:"flex", flexWrap:"nowrap", justifyContent:"center", alignItems:"center", gap:"1rem", padding:"0 0.8rem 0 0.8rem"}}>
           <InputCalendar
-            type="month"
             onChange={(e) => {
               setDates({
                 ...dates,
@@ -171,12 +167,10 @@ export default function Reserves(){
               console.log(dates.startDate);
             }}
             value={dates.startDate}
-            //min="1944-01-01"
-            min = "1944-01"
-            max={dates.endDate === '' ? dayjs().format("YYYY-MM") : dates.endDate}
+            min="2020-01-23"
+            max={dates.endDate === '' ? dayjs().format(dateFormat) : dates.endDate}
           />
           <InputCalendar
-            type="month"
             onChange={(e) => {
               setDates({
                 ...dates,
@@ -185,34 +179,34 @@ export default function Reserves(){
               console.log(dates.endDate);
             }}
             value={dates.endDate}
-            min = {dates.startDate === '' ? "1944-01" : dates.startDate}
-            max={dayjs().format("YYYY-MM")}
+            min = {dates.startDate === '' ? "2020-01-23" : dates.startDate}
+            max={dayjs().format(dateFormat)}
           />
         </div>
       </div>
-      <div onClick={() => {fetchInflationRateData()}} className = {styles.searchButton}>
-        Buscar
+      <div onClick={() => {fetchExchangeRateData()}} className = {styles.searchButton}>
+        {t.search}
       </div>
-      {isFetchingData && <p>Cargando...</p>}
-      {((combinedInflationRateData === undefined) && !isFetchingData) && <p>{mensaje}</p>}
-      {(!isFetchingData && (combinedInflationRateData)) && (
+      {isFetchingData && <p>{t.loading}</p>}
+      {((combinedExchangeRateData === undefined) && !isFetchingData) && <p>{mensaje}</p>}
+      {(!isFetchingData && (combinedExchangeRateData)) && (
         <div style={{width: "90%", height: "62%"}}>
           <Line 
             options={options}
             data={{
-              labels: combinedInflationRateData?.dates,
+              labels: combinedExchangeRateData?.dates,
               datasets: [
                 {
-                  label: 'Inflación Mensual',
-                  data: combinedInflationRateData?.values[0],
+                  label: t.graphLegends[0],
+                  data: combinedExchangeRateData?.values[0],
                   fill: false,
-                  borderColor: 'rgb(0,0,255)',
+                  borderColor: 'rgb(0,0,0)',
                   borderWidth: 2,
                   pointRadius: 0
                 },
                 {
-                  label: 'Inflación interanual',
-                  data: combinedInflationRateData?.values[1],
+                  label: t.graphLegends[1],
+                  data: combinedExchangeRateData?.values[1],
                   fill: false,
                   borderColor: 'rgb(255,0,0)',
                   borderWidth: 2,
