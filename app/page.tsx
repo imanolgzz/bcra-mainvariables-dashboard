@@ -51,6 +51,9 @@ export default function Home() {
       {!isFetchingData && (
         <div className={styles.cardsContainer}>
           <div className={`${styles.baseCard} ${styles.smallCard}`}>
+            <div className = {styles.dateContainer}>
+
+            </div>
             <h4>Reservas Internacionales</h4>
             <div>
               <h3>${generalData?.internationalReserves.value}</h3>

@@ -18,6 +18,7 @@
   align-items: center;
   text-align: center;
   gap: 0.6rem;
+  transition: background-color 0.4s ease;
 }
 
 .smallCard{

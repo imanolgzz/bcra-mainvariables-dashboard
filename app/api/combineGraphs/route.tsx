@@ -15,7 +15,6 @@ export async function POST(req: Request) {
     });
   });
 
-
   // Ordenar las fechas
   dates.sort((a: string, b: string) => {
     return new Date(a).getTime() - new Date(b).getTime();

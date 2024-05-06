@@ -53,27 +53,27 @@ export default function Reserves(){
     endDate: ''
   })
 
-  const [combinedExchangeRateData, setCombinedExchangeRateData] = useState<combinedQueryProps|undefined> (undefined)
-  let retailExchangeRateData: queryProps|undefined = undefined;
-  let wholesaleExchangeRateData: queryProps|undefined = undefined;
+  const [combinedInterestRateData, setcombinedInterestRateData] = useState<combinedQueryProps|undefined> (undefined)
+  let tnaData: queryProps|undefined = undefined;
+  let teaData: queryProps|undefined = undefined;
 
-  const fetchCombinedExchangeRateData = async () => {
-    if(retailExchangeRateData === undefined || wholesaleExchangeRateData === undefined){
+  const fetchcombinedInterestRateData = async () => {
+    if(tnaData === undefined || teaData === undefined){
       setIsFetchingData(false);
       setMensaje("Error al mostrar las gráficas");
-      console.log(retailExchangeRateData)
-      console.log(wholesaleExchangeRateData)
+      console.log(tnaData)
+      console.log(teaData)
       return;
     }
     setIsFetchingData(true);
     let body = [
       {
-        dates: retailExchangeRateData.dates,
-        values: retailExchangeRateData.values
+        dates: tnaData.dates,
+        values: tnaData.values
       },
       {
-        dates: wholesaleExchangeRateData.dates,
-        values: wholesaleExchangeRateData.values
+        dates: teaData.dates,
+        values: teaData.values
       }
     ]
 
@@ -88,12 +88,11 @@ export default function Reserves(){
     const data = await response.json()
 
     if(response.status === 200){
-      console.log("console 6")
-      setCombinedExchangeRateData(data);
+      setcombinedInterestRateData(data);
       setIsFetchingData(false);
     } else {
       setMensaje(data.error);
-      setCombinedExchangeRateData(undefined);
+      setcombinedInterestRateData(undefined);
       setIsFetchingData(false);
     }
   }
@@ -116,7 +115,7 @@ export default function Reserves(){
       }),
     }).then(response => response.json()).then(data => {
       console.log("Data from retail exchange rate received ", data);
-      retailExchangeRateData = data;
+      tnaData = data;
       const response2 = fetch('/api/variable', {
         method: 'POST',
         headers: {
@@ -129,8 +128,8 @@ export default function Reserves(){
         }),
       }).then(response => response.json()).then(data => {
         console.log("Data from wholesale exchange rate received ", data);
-        wholesaleExchangeRateData = data;
-        fetchCombinedExchangeRateData();
+        teaData = data;
+        fetchcombinedInterestRateData();
       }).catch(error => {
         console.error('Error:', error);
         setIsFetchingData(false);
@@ -189,17 +188,17 @@ export default function Reserves(){
         Buscar
       </div>
       {isFetchingData && <p>Cargando...</p>}
-      {((combinedExchangeRateData === undefined) && !isFetchingData) && <p>{mensaje}</p>}
-      {(!isFetchingData && (combinedExchangeRateData)) && (
+      {((combinedInterestRateData === undefined) && !isFetchingData) && <p>{mensaje}</p>}
+      {(!isFetchingData && (combinedInterestRateData)) && (
         <div style={{width: "90%", height: "62%"}}>
           <Line 
             options={options}
             data={{
-              labels: combinedExchangeRateData?.dates,
+              labels: combinedInterestRateData?.dates,
               datasets: [
                 {
                   label: 'Tipo de cambio Minorista',
-                  data: combinedExchangeRateData?.values[0],
+                  data: combinedInterestRateData?.values[0],
                   fill: false,
                   borderColor: 'rgb(0,0,0)',
                   borderWidth: 2,
@@ -207,7 +206,7 @@ export default function Reserves(){
                 },
                 {
                   label: 'Tipo de cambio Mayorista',
-                  data: combinedExchangeRateData?.values[1],
+                  data: combinedInterestRateData?.values[1],
                   fill: false,
                   borderColor: 'rgb(255,0,0)',
                   borderWidth: 2,

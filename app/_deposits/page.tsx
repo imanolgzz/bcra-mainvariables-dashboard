@@ -49,9 +49,9 @@ export default function Reserves(){
     endDate: ''
   })
 
-  const [reservesData, setReservesData] = useState<queryProps|undefined> (undefined)
+  const [depositsData, setdepositsData] = useState<queryProps|undefined> (undefined)
 
-  const fetchReservesData = async () => {
+  const fetchdepositsData = async () => {
     if(dates.startDate === '' || dates.endDate === ''){
       return
     }
@@ -63,19 +63,19 @@ export default function Reserves(){
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        idVariable: 1,
+        idVariable: 21,
         startDate: dates.startDate,
         endDate: dates.endDate
       }),
     })
     const data = await response.json()
     if(response.status === 200){
-      setReservesData(data);
-      console.log(reservesData);
+      setdepositsData(data);
+      console.log(depositsData);
       setIsFetchingData(false);
     } else {
       setMensaje(data.error);
-      setReservesData(undefined);
+      setdepositsData(undefined);
       setIsFetchingData(false);
     }
   }
@@ -91,9 +91,9 @@ export default function Reserves(){
 
   return(
     <>
-      <h1>Reservas Internacionales</h1>
+      <h1>Depósitos</h1>
       <div className = {styles.generalContainer}>
-        <p style={{textAlign:"center", paddingRight: "1rem", paddingLeft:"1rem"}}>Seleccione un rango de fechas para ver la evolución de las reservas internacionales (en millones de dólares).</p>
+        <p style={{textAlign:"center", paddingRight: "1rem", paddingLeft:"1rem"}}>Seleccione un rango de fechas para ver la evolución de los Depósitos en efectivo en las entidades financieras (en millones de pesos)</p>
         <div style={{display:"flex", flexWrap:"nowrap", justifyContent:"center", alignItems:"center", gap:"1rem", padding:"0 0.8rem 0 0.8rem"}}>
           <InputCalendar
             onChange={(e) => {
@@ -121,21 +121,21 @@ export default function Reserves(){
           />
         </div>
       </div>
-      <div onClick={() => {fetchReservesData()}} className = {styles.searchButton}>
+      <div onClick={() => {fetchdepositsData()}} className = {styles.searchButton}>
         Buscar
       </div>
       {isFetchingData && <p>Cargando...</p>}
-      {((reservesData === undefined) && !isFetchingData) && <p>{mensaje}</p>}
-      {(!isFetchingData && reservesData) && (
+      {((depositsData === undefined) && !isFetchingData) && <p>{mensaje}</p>}
+      {(!isFetchingData && depositsData) && (
         <div style={{width: "90%", height: "62%"}}>
           <Line 
             options={options}
             data={{
-              labels: reservesData?.dates,
+              labels: depositsData?.dates,
               datasets: [
                 {
-                  label: 'Reservas Internacionales del BCRA (en millones de dólares)',
-                  data: reservesData?.values,
+                  label: 'Depósitos en efectivo en las entidades financieras (en millones de pesos)',
+                  data: depositsData?.values,
                   fill: false,
                   borderColor: 'rgb(0,0,0)',
                   borderWidth: 2,

@@ -9,13 +9,15 @@ import { MdCurrencyExchange } from 'react-icons/md';
 import { TbPigMoney } from 'react-icons/tb';
 import { GiReceiveMoney } from 'react-icons/gi';
 import { IoMdMenu } from 'react-icons/io';
+import { FaInfoCircle } from 'react-icons/fa';
 
 export function NavbarItems(props: any){
+  const { currentPage } = props;
   return(
     <>
       <div className = {styles.detailsContainer}>
         <h2>BCRA <br />DASHBOARD</h2>
-        Principales Variables
+        Principales Variables <br />
       </div>
       <div className={styles.botones}>
         <NavbarButton onClick={props.onClick} text="General" href="/" icon={<RiDashboard2Fill/>}/>
@@ -24,26 +26,30 @@ export function NavbarItems(props: any){
         <NavbarButton onClick={props.onClick} text="Tasas de Interés" href="/interest-rate" icon = {<AiOutlineStock/>}/>
         <NavbarButton onClick={props.onClick} text="Base Monetaria" href="/monetary-base" icon = {<RiPrinterFill/>}/>
         <NavbarButton onClick={props.onClick} text="Pases Pasivos" href="/reverse-repos" icon = {<GiReceiveMoney/>}/>
-        <NavbarButton onClick={props.onClick} text="Depósitos" href="/deposits" icon = {<TbPigMoney/>}/>
         <NavbarButton onClick={props.onClick} text="Inflación" href="/inflation" icon = {<FaMoneyBillTrendUp/>}/>
+        <NavbarButton onClick={props.onClick} text="Acerca de" href="/about" icon = {<FaInfoCircle/>}/>
+        {/* 
+        <NavbarButton onClick={props.onClick} text="Depósitos" href="/deposits" icon = {<TbPigMoney/>}/>
         <NavbarButton onClick={props.onClick} text="Otros" href="/other" icon={<AiFillBank/>}/>
+        */}
       </div>
     </>
   )
 }
 
-export default function Navbar(){
+export default function Navbar(props: any){
+  const {currentPage} = props
   const [active, setActive] = useState(false);
   return (
     <>
       <div className={styles.navbarWeb}>
-        <NavbarItems/>        
+        <NavbarItems currentPage={currentPage}/>        
       </div>
       <div className={styles.navbarMobile}>
         <IoMdMenu style={{zIndex:"2"}} size={"1.4rem"} onClick={() => {setActive(!active)}}/>
       </div>
       <div className = {`${styles.itemsContainerMobile} ${active ? styles.active: ''}`}>
-        <NavbarItems onClick={() => {setActive(false)}}/>    
+        <NavbarItems currentPage={currentPage} onClick={() => {setActive(false)}}/>    
       </div>
     </>
   )
