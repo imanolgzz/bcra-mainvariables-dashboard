@@ -47,4 +47,4 @@ This project is developed using Next.js and utilizes various libraries and frame
 
 The project is open-source and contributions are welcome. For more information, please visit the GitHub repository at [https://github.com/imanolgzz/bcra-mainvariables-dashboard](https://github.com/imanolgzz/bcra-mainvariables-dashboard).
 
-**Version: 1.1 - May 6th, 2024**
+**Version: 1.1.1 - May 6th, 2024**
