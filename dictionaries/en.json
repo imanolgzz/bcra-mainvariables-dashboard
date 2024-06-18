@@ -1,5 +1,6 @@
 {
   "home":{
+    "lang": "en",
     "loading":"Loading...",
     "title":"General Statistics",
     "internationalReserves":"International Reserves",
@@ -35,7 +36,7 @@
   },
   "reserves": {
     "title": "International Reserves",
-    "description": "Select a date range to see the evolution of international reserves (in million dollars).",
+    "description": "Select a date range to see the evolution of international reserves (in million dollars). The BCRA has limited the consultation interval for variables in its API to one year, don't worry we will fix it soon.",
     "search": "Search",
     "graphLegends": [
       "BCRA International Reserves (in millions dollars)"
@@ -46,7 +47,7 @@
   },
   "exchangeRate": {
     "title": "Exchange Rate",
-    "description": "Select a date range to see the evolution of the official exchange rate (in pesos per dollar).",
+    "description": "Select a date range to see the evolution of the official exchange rate (in pesos per dollar). The BCRA has limited the consultation interval for variables in its API to one year, don't worry we will fix it soon.",
     "search": "Search",
     "graphLegends": [
       "Retail Exchange Rate",
@@ -58,7 +59,7 @@
   },
   "interestRates": {
     "title": "Interest Rates",
-    "description": "Select a date range to see the evolution of the monetary policy rate.",
+    "description": "Select a date range to see the evolution of the monetary policy rate. The BCRA has limited the consultation interval for variables in its API to one year, don't worry we will fix it soon.",
     "search": "Search",
     "graphLegends": [
       "Annual Percentage Rate (APR)",
@@ -70,7 +71,7 @@
   },
   "monetaryBase": {
     "title": "Monetary Base",
-    "description": "Select a date range to see the evolution of the nominal monetary base (in million pesos).",
+    "description": "Select a date range to see the evolution of the nominal monetary base (in million pesos). The BCRA has limited the consultation interval for variables in its API to one year, don't worry we will fix it soon.",
     "search": "Search",
     "graphLegends": [
       "Nominal Monetary Base (in million pesos)"
@@ -81,7 +82,7 @@
   },
   "reverseRepos": {
     "title": "Reverse Repos",
-    "description": "Select a date range to see the evolution of reverse repos for the BCRA (in million pesos).",
+    "description": "Select a date range to see the evolution of reverse repos for the BCRA (in million pesos). The BCRA has limited the consultation interval for variables in its API to one year, don't worry we will fix it soon.",
     "search": "Search",
     "graphLegends": [
       "Reverse Repos for the BCRA (in millions of pesos)"
@@ -92,7 +93,7 @@
   },
   "inflation": {
     "title": "Inflation",
-    "description": "Select a date range to see the evolution of monthly and year-on-year inflation.",
+    "description": "Select a date range to see the evolution of monthly and year-on-year inflation. The BCRA has limited the consultation interval for variables in its API to one year, don't worry we will fix it soon.",
     "search": "Search",
     "graphLegends": [
       "Monthly Inflation",

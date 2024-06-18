@@ -31,8 +31,8 @@ export default async function About({
         </p>
         
         <p>
-        <b>{t.Version} 1.1.1</b> <br />
-          {t.LastUpdate}: 2024-05-06 <br /> 
+        <b>{t.Version} 1.3</b> <br />
+          {t.LastUpdate}: 2024-06-18 <br /> 
         </p>
       </div>
       

@@ -19,6 +19,7 @@ import {
 dayjs.extend(customParseFormat);
 
 const dateFormat = 'YYYY-MM-DD';
+const dateFormat2 = 'YYYY-MM';
 
 interface datesProps {
   startDate: string,
@@ -182,7 +183,8 @@ export default function InflationRateClient({t}: any){
             }}
             value={dates.startDate}
             //min="1944-01-01"
-            min = "1944-01"
+            //min = "1944-01"
+            min = {dates.endDate === '' ? "1944-01" : dayjs(dates.endDate).subtract(11, 'month').format(dateFormat2)}
             max={dates.endDate === '' ? dayjs().format("YYYY-MM") : dates.endDate}
           />
           <InputCalendar
@@ -196,7 +198,9 @@ export default function InflationRateClient({t}: any){
             }}
             value={dates.endDate}
             min = {dates.startDate === '' ? "1944-01" : dates.startDate}
-            max={dayjs().format("YYYY-MM")}
+            //max={dayjs().format("YYYY-MM")}
+            max = {dates.startDate === '' ? dayjs().format(dateFormat2) : dayjs(dates.startDate).add(11, 'month').format(dateFormat2)}
+            
           />
         </div>
       </div>

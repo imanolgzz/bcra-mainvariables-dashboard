@@ -167,7 +167,8 @@ export default function InterestRateClient({t}: any){
               console.log(dates.startDate);
             }}
             value={dates.startDate}
-            min="2020-01-23"
+            //min="2020-01-23"
+            min = {dates.endDate === '' ? "2020-01-23" : dayjs(dates.endDate).subtract(365, 'day').format(dateFormat)}
             max={dates.endDate === '' ? dayjs().format(dateFormat) : dates.endDate}
           />
           <InputCalendar
@@ -180,7 +181,8 @@ export default function InterestRateClient({t}: any){
             }}
             value={dates.endDate}
             min = {dates.startDate === '' ? "2020-01-23" : dates.startDate}
-            max={dayjs().format(dateFormat)}
+            //max={dayjs().format(dateFormat)}
+            max = {dates.startDate === '' ? dayjs().format(dateFormat) : dayjs(dates.startDate).add(365, 'day').format(dateFormat)}
           />
         </div>
       </div>

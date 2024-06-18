@@ -104,7 +104,8 @@ export default function MonetaryBaseClient({t}: any){
               console.log(dates.startDate);
             }}
             value={dates.startDate}
-            min="1996-01-02"
+            //min="1996-01-02"
+            min = {dates.endDate === '' ? "1996-01-02" : dayjs(dates.endDate).subtract(365, 'day').format(dateFormat)}
             max={dates.endDate === '' ? dayjs().format(dateFormat) : dates.endDate}
           />
           <InputCalendar
@@ -117,7 +118,8 @@ export default function MonetaryBaseClient({t}: any){
             }}
             value={dates.endDate}
             min = {dates.startDate === '' ? "1996-01-02" : dates.startDate}
-            max={dayjs().format(dateFormat)}
+            //max={dayjs().format(dateFormat)}
+            max = {dates.startDate === '' ? dayjs().format(dateFormat) : dayjs(dates.startDate).add(365, 'day').format(dateFormat)}
           />
         </div>
       </div>

@@ -1,5 +1,6 @@
 {
   "home":{
+    "lang": "es",
     "loading":"Cargando...",
     "title":"Estadísticas generales",
     "internationalReserves":"Reservas Internacionales",
@@ -35,7 +36,7 @@
   },
   "reserves":{
     "title":"Reservas Internacionales",
-    "description": "Seleccione un rango de fechas para ver la evolución de las reservas internacionales (en millones de dólares).",
+    "description": "Seleccione un rango de fechas para ver la evolución de las reservas internacionales (en millones de dólares). El BCRA ha limitado el intervalo de consulta de variables en su API a un año, no te preocupes pronto lo arreglaremos.",
     "search": "Buscar",
     "graphLegends":[
       "Reservas Internacionales del BCRA (en millones de dólares)"
@@ -46,7 +47,7 @@
   },
   "exchangeRate":{
     "title":"Tipo de Cambio",
-    "description": "Seleccione un rango de fechas para ver la evolución del tipo de cambio oficial (en pesos por dólar).",
+    "description": "Seleccione un rango de fechas para ver la evolución del tipo de cambio oficial (en pesos por dólar). El BCRA ha limitado el intervalo de consulta de variables en su API a un año, no te preocupes pronto lo arreglaremos.",
     "search": "Buscar",
     "graphLegends": [
       "Tipo de cambio minorista",
@@ -58,7 +59,7 @@
   },
   "interestRates":{
     "title":"Tasas de Interés",
-    "description": "Seleccione un rango de fechas para ver la evolución de la tasa de política monetaria.",
+    "description": "Seleccione un rango de fechas para ver la evolución de la tasa de política monetaria. El BCRA ha limitado el intervalo de consulta de variables en su API a un año, no te preocupes pronto lo arreglaremos.",
     "search": "Buscar",
     "graphLegends": [
       "Tasa Nominal Anual (TNA)",
@@ -70,7 +71,7 @@
   },
   "monetaryBase":{
     "title":"Base Monetaria",
-    "description": "Seleccione un rango de fechas para ver la evolución de la base monetaria nominal (en millones de pesos).",
+    "description": "Seleccione un rango de fechas para ver la evolución de la base monetaria nominal (en millones de pesos). El BCRA ha limitado el intervalo de consulta de variables en su API a un año, no te preocupes pronto lo arreglaremos.",
     "search": "Buscar",
     "graphLegends": [
       "Base Monetaria Nominal (en millones de pesos)"
@@ -81,7 +82,7 @@
   },
   "reverseRepos":{
     "title":"Pases Pasivos",
-    "description": "Seleccione un rango de fechas para ver la evolución de los pases pasivos para el BCRA (en millones de pesos).",
+    "description": "Seleccione un rango de fechas para ver la evolución de los pases pasivos para el BCRA (en millones de pesos). El BCRA ha limitado el intervalo de consulta de variables en su API a un año, no te preocupes pronto lo arreglaremos.",
     "search": "Buscar",
     "graphLegends": [
       "Pases Pasivos para el BCRA (en millones de pesos)"
@@ -92,7 +93,7 @@
   },
   "inflation":{
     "title":"Inflación",
-    "description": "Seleccione un rango de fechas para ver la evolución de la inflación mensual e interanual.",
+    "description": "Seleccione un rango de fechas para ver la evolución de la inflación mensual e interanual. El BCRA ha limitado el intervalo de consulta de variables en su API a un año, no te preocupes pronto lo arreglaremos.",
     "search": "Buscar",
     "graphLegends": [
       "Inflación Mensual",

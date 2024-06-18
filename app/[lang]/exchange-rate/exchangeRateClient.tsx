@@ -177,7 +177,8 @@ export default function ExchangeRateClient({t}: any){
               console.log(dates.startDate);
             }}
             value={dates.startDate}
-            min="2010-06-01"
+            //min="2010-06-01"
+            min = {dates.endDate === '' ? "1996-01-02" : dayjs(dates.endDate).subtract(365, 'day').format(dateFormat)}
             max={dates.endDate === '' ? dayjs().format(dateFormat) : dates.endDate}
           />
           <InputCalendar
@@ -190,7 +191,8 @@ export default function ExchangeRateClient({t}: any){
             }}
             value={dates.endDate}
             min = {dates.startDate === '' ? "2010-06-01" : dates.startDate}
-            max={dayjs().format(dateFormat)}
+            //max={dayjs().format(dateFormat)}
+            max = {dates.startDate === '' ? dayjs().format(dateFormat) : dayjs(dates.startDate).add(365, 'day').format(dateFormat)}
           />
         </div>
       </div>
