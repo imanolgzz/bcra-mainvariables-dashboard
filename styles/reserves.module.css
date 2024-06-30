@@ -19,3 +19,16 @@
   color: white;
   cursor: pointer;
 }
+
+.dropdownButton{
+  position: relative;
+  width: 17rem;
+  height: 2.2rem;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

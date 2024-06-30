@@ -74,11 +74,14 @@
     "description": "Seleccione un rango de fechas para ver la evolución de la base monetaria nominal (en millones de pesos). El BCRA ha limitado el intervalo de consulta de variables en su API a un año, no te preocupes pronto lo arreglaremos.",
     "search": "Buscar",
     "graphLegends": [
-      "Base Monetaria Nominal (en millones de pesos)"
+      "Base Monetaria Nominal (en millones de pesos)",
+      "Base Monetaria Amplia (BM + Pases Pasivos) (en millones de pesos)"
     ],
     "loading": "Cargando...",
     "error": "Error al cargar los datos",
-    "notFound": "No se encontraron datos en el rango de fechas proporcionado"
+    "notFound": "No se encontraron datos en el rango de fechas proporcionado",
+    "monetaryBase": "Base Monetaria",
+    "broadMonetaryBase": "Base Monetaria Amplia"
   },
   "reverseRepos":{
     "title":"Pases Pasivos",

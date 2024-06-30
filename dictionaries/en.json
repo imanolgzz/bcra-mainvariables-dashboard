@@ -74,11 +74,14 @@
     "description": "Select a date range to see the evolution of the nominal monetary base (in million pesos). The BCRA has limited the consultation interval for variables in its API to one year, don't worry we will fix it soon.",
     "search": "Search",
     "graphLegends": [
-      "Nominal Monetary Base (in million pesos)"
+      "Nominal Monetary Base (in million pesos)",
+      "Nominal Broad Monetary Base (MB + Reverse Repos) (in million pesos)"
     ],
     "loading": "Loading...",
     "error": "Error loading data",
-    "notFound": "No data found for the provided date range"
+    "notFound": "No data found for the provided date range",
+    "monetaryBase": "Monetary Base",
+    "broadMonetaryBase": "Broad Monetary Base"
   },
   "reverseRepos": {
     "title": "Reverse Repos",
