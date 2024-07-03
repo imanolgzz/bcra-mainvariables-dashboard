@@ -75,7 +75,9 @@
     "search": "Buscar",
     "graphLegends": [
       "Base Monetaria Nominal (en millones de pesos)",
-      "Base Monetaria Amplia (BM + Pases Pasivos) (en millones de pesos)"
+      "Base Monetaria Amplia (BM + Pases Pasivos) (en millones de pesos)",
+      "Base Monetaria Simple",
+      "Pases Pasivos"
     ],
     "loading": "Cargando...",
     "error": "Error al cargar los datos",

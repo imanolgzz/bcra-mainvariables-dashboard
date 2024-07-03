@@ -75,7 +75,9 @@
     "search": "Search",
     "graphLegends": [
       "Nominal Monetary Base (in million pesos)",
-      "Nominal Broad Monetary Base (MB + Reverse Repos) (in million pesos)"
+      "Nominal Broad Monetary Base (MB + Reverse Repos) (in million pesos)",
+      "Monetary Base Only",
+      "Reverse Repos Only"
     ],
     "loading": "Loading...",
     "error": "Error loading data",

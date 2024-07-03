@@ -60,9 +60,9 @@ export default function MonetaryBaseClient({t}: any){
   const [monetaryBaseData, setmonetaryBaseData] = useState<queryProps|undefined> (undefined)
   const [broadMonetaryBaseData, setBroadMonetaryBaseData] = useState<queryProps|undefined> (undefined)
   const [searchType, setSearchType] = useState<string>(t.monetaryBase);
+  const [combinedMonetaryBaseData, setCombinedInterestRateData] = useState<combinedQueryProps|undefined> (undefined)
   let monetaryBaseDataAux: queryProps|undefined = undefined;
   let reverseReposDataAux: queryProps|undefined = undefined;
-  let combinedMonetaryBaseData: combinedQueryProps|undefined = undefined; 
   const items: MenuProps['items'] = [
     {
       key: '1',
@@ -123,22 +123,20 @@ export default function MonetaryBaseClient({t}: any){
     const data = await response.json()
 
     if(response.status === 200){
-      combinedMonetaryBaseData = data;
+      setCombinedInterestRateData(data);
       // here we are going to sum each value with the other
       let finalBroadMonetaryBase: queryProps|undefined = undefined;
       
-      if(combinedMonetaryBaseData !== undefined){
-        let dates: string[] = combinedMonetaryBaseData.dates;
+        let dates: string[] = data.dates;
         let values: number[] = [];
-        for(let i = 0; i <combinedMonetaryBaseData.values[0].length; i++){
-          values.push(combinedMonetaryBaseData.values[0][i] + combinedMonetaryBaseData.values[1][i]);
+        for(let i = 0; i <data.values[0].length; i++){
+          values.push(data.values[0][i] + data.values[1][i]);
         }
         finalBroadMonetaryBase = {
           dates: dates,
           values: values
         }
         setBroadMonetaryBaseData(finalBroadMonetaryBase);
-      }
 
       setIsFetchingData(false);
     } else {
@@ -273,7 +271,7 @@ export default function MonetaryBaseClient({t}: any){
       </div>
       {isFetchingData && <p>{t.loading}</p>}
       {((monetaryBaseData === undefined && searchType === t.monetaryBase) && !isFetchingData) && <p>{mensaje}</p>}
-      {((broadMonetaryBaseData === undefined && searchType === t.broadMonetaryBase) && !isFetchingData) && <p>{mensaje}</p>}
+      {(((broadMonetaryBaseData === undefined || combinedMonetaryBaseData === undefined) && (searchType === t.broadMonetaryBase)) && !isFetchingData) && <p>{mensaje}</p>}
       {((!isFetchingData && monetaryBaseData) && searchType === t.monetaryBase) && (
         <div style={{width: "90%", height: "62%"}}>
           <Line 
@@ -294,7 +292,7 @@ export default function MonetaryBaseClient({t}: any){
           />
         </div>
       )}
-      {((!isFetchingData && broadMonetaryBaseData) && searchType === t.broadMonetaryBase) && (
+      {((!isFetchingData && (broadMonetaryBaseData && combinedMonetaryBaseData)) && searchType === t.broadMonetaryBase) && (
         <div style={{width: "90%", height: "62%"}}>
           <Line 
             options={options}
@@ -308,7 +306,23 @@ export default function MonetaryBaseClient({t}: any){
                   borderColor: 'rgb(0,0,0)',
                   borderWidth: 2,
                   pointRadius: 0
-                }
+                },
+                {
+                  label: t.graphLegends[2],
+                  data: combinedMonetaryBaseData?.values[0],
+                  fill: false,
+                  borderColor: 'rgb(255,0,0)',
+                  borderWidth: 2,
+                  pointRadius: 0
+                },
+                {
+                  label: t.graphLegends[3],
+                  data: combinedMonetaryBaseData?.values[1],
+                  fill: false,
+                  borderColor: 'rgb(0,0,255)',
+                  borderWidth: 2,
+                  pointRadius: 0
+                },
               ]
             }}
           />
